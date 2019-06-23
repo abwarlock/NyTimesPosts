@@ -3,6 +3,7 @@
     <string name="retry">Retry</string>
     <string name="post_error">An error occurred while loading the posts</string>
     <string name="select_section">Select Section</string>
+    <string name="showing_post_for">Showing Post For</string>
 
     <string-array name="sectionList">
         <item>arts</item>

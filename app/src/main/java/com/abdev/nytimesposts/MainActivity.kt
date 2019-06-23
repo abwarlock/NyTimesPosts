@@ -32,9 +32,19 @@ class MainActivity : AppCompatActivity() {
         binding.layoutManager = LinearLayoutManager(this)
         binding.dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(PostListViewModels::class.java)
+        title = "${getString(R.string.showing_post_for)} ${PrefManager.getValue(this)}"
+
         binding.viewModel = viewModel
+        binding.swipeRefresh.setOnRefreshListener {
+            viewModel.onRetrievePost.invoke(true)
+            binding.swipeRefresh.isRefreshing = false
+        }
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
-            if (errorMessage != null) showError(errorMessage) else hideError()
+            if (errorMessage != null) {
+                showError(errorMessage)
+            } else {
+                hideError()
+            }
         })
     }
 
@@ -59,12 +69,13 @@ class MainActivity : AppCompatActivity() {
         builder.setTitle("Select Section")
         builder.setSingleChoiceItems(sectionArray, selectedIndex) { _, which ->
             PrefManager.setValue(this, sectionArray[which])
-            viewModel.onRetrievePost.invoke(true)
+            title = "${getString(R.string.showing_post_for)} ${PrefManager.getValue(this)}"
+            viewModel.onRetrievePost.invoke(false)
             if (::alertDialog.isInitialized) {
                 alertDialog.dismiss()
             }
         }
-        builder.setCancelable(false)
+        builder.setCancelable(true)
         alertDialog = builder.show()
     }
 
