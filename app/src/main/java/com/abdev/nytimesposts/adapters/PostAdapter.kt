@@ -27,8 +27,8 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
         holder.bind(postList[position])
     }
 
-    fun updatePostList(postList: List<Result>) {
-        this.postList = postList
+    fun updatePostList(postList: List<Result>?) {
+        this.postList = postList ?: ArrayList(0)
         notifyDataSetChanged()
     }
 

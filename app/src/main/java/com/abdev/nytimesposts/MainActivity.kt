@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.abdev.nytimesposts.databinding.ActivityMainBinding
 import com.abdev.nytimesposts.viewmodels.PostListViewModels
+import com.abdev.nytimesposts.viewmodels.ViewModelFactory
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity() {
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.layoutManager = LinearLayoutManager(this)
         binding.dividerItemDecoration = DividerItemDecoration(this, LinearLayoutManager.VERTICAL)
-        viewModel = ViewModelProviders.of(this).get(PostListViewModels::class.java)
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(PostListViewModels::class.java)
         binding.viewModel = viewModel
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
