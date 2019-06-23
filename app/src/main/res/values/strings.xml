@@ -2,4 +2,17 @@
     <string name="app_name">NyTimesPosts</string>
     <string name="retry">Retry</string>
     <string name="post_error">An error occurred while loading the posts</string>
+    <string name="select_section">Select Section</string>
+
+    <string-array name="sectionList">
+        <item>arts</item>
+        <item>books</item>
+        <item>business</item>
+        <item>home</item>
+        <item>magazine</item>
+        <item>movies</item>
+        <item>national</item>
+        <item>technology</item>
+        <item>travel</item>
+    </string-array>
 </resources>

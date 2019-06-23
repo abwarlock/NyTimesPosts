@@ -9,10 +9,9 @@ import com.abdev.nytimesposts.database.DataFactory
 class ViewModelFactory(private val activity: AppCompatActivity) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(PostListViewModels::class.java)) {
-            val db = Room.databaseBuilder(activity.applicationContext, DataFactory::class.java, "POSTS")
-                .allowMainThreadQueries().build()
+            val db = Room.databaseBuilder(activity.applicationContext, DataFactory::class.java, "POSTS").build()
             @Suppress("UNCHECKED_CAST")
-            return PostListViewModels(db.postDao()) as T
+            return PostListViewModels(db.postDao(), activity) as T
         }
         throw IllegalStateException("Unknown ViewModel")
     }
